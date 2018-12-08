@@ -1,0 +1,21 @@
+﻿@model IEnumerable<Post>
+
+@{ 
+
+}
+<div id="body-title">
+    <h2>Seddon, Seddon't</h2>
+</div>
+<img src="~/content/static/Blue_globe_banner.svg.png" />
+<div>
+    <ul>
+        @foreach(var post in Model)
+        {
+           <li>
+              <a asp-controller="Home" asp-action="Post" asp-route-id="@post.Id">
+                @post.Title
+              </a>
+            </li>
+        }
+    </ul>
+</div>

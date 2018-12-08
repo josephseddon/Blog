@@ -1,0 +1,39 @@
+﻿@addTagHelper *,Microsoft.AspNetCore.Mvc.TagHelpers
+@using Blog.Models
+@using Blog.ViewModels
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewBag.Title</title>
+    <link href="~/css/site.css" rel="stylesheet" />
+</head>
+<body>
+    <div id="site-container">
+        <div id='header'>
+            <div id='header-nav-container'>
+                <div id='header-nav'>
+                    <a class='header-nav-link header-nav-home' asp-controller="Home" asp-action="Index">Home</a> <span>||</span>
+                    <a class='header-nav-link header-nav-create' asp-controller="Panel" asp-action="Edit">Create Post</a> <span>||</span> 
+                    <a class='header-nav-link header-nav-admin' asp-controller="Panel" asp-action="Index">Admin Panel</a> 
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <span>||</span> <a class='header-nav-link header-nav-logout' asp-controller="Auth" asp-action="Logout">Logout</a> 
+                    }
+                    else
+                    {
+                        <span>||</span> <a class='header-nav-link header-nav-login' asp-controller="Auth" asp-action="Login">Sign In</a>
+                    }
+
+                </div>
+             </div>
+        </div>
+        <div id='body'>
+            @RenderBody()
+        </div>
+    </div>
+</body>
+</html>
