@@ -2,6 +2,7 @@
 using Blog.Data.Repository;
 using Blog.Models;
 using Blog.ViewModels;
+using Ganss.XSS;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -54,20 +55,23 @@ namespace Blog.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(PostViewModel vm)
+        public async Task<IActionResult> Edit(PostViewModel postvm)
         {
+            var sanitizer = new HtmlSanitizer();
+            var html = postvm.Body;
+            var sanitised = sanitizer.Sanitize(html);
             var post = new Post
-            {
-                Id = vm.Id,
-                Title = vm.Title,
-                Body = vm.Body,
+            {   
+                Id = postvm.Id,
+                Title = postvm.Title,
+                Body = sanitised,
                 Image = await _fileManager.SaveImage(vm.Image)
             };
 
-            if (vm.Image == null)
-                post.Image = vm.CurrentImage;
+            if (postvm.Image == null)
+                post.Image = postvm.CurrentImage;
             else
-                post.Image = await _fileManager.SaveImage(vm.Image);
+                post.Image = await _fileManager.SaveImage(postvm.Image);
 
             if (post.Id > 0)
                 _repo.UpdatePost(post);

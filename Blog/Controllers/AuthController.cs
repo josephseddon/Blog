@@ -30,9 +30,9 @@ namespace Blog.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Login(LoginViewModel vm)
+        public async Task<IActionResult> Login(LoginViewModel loginvm)
         {
-            var result = await _signInManager.PasswordSignInAsync(vm.Username, vm.Password, false, false);
+            var result = await _signInManager.PasswordSignInAsync(loginvm.Username, loginvm.Password, false, false);
 
             return RedirectToAction("Index", "Panel");
         }
