@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace Blog.Data
 {
-    public class BlogContext : IdentityDbContext 
+    public class BlogContext : IdentityDbContext <ApplicationUser>
     {
         public BlogContext(DbContextOptions<BlogContext> options) 
             : base(options)

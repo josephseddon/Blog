@@ -12,6 +12,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Blog.Data;
 using Microsoft.AspNetCore.Identity;
+using Blog.Models;
 
 namespace Blog
 {
@@ -41,7 +42,7 @@ namespace Blog
 
                 if (!ctx.Users.Any(u => u.UserName == "admin"))
                 {
-                    var adminUser = new IdentityUser
+                    var adminUser = new ApplicationUser
                     {
                         UserName = "admin",
                         Email = "admin@test.com"

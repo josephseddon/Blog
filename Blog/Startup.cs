@@ -28,7 +28,7 @@ namespace Blog
         {
             services.AddMvc();
 
-            services.AddIdentity<IdentityUser,IdentityRole> (options =>
+            services.AddIdentity<ApplicationUser,IdentityRole> (options =>
             {
                 options.Password.RequireDigit = false;
                 options.Password.RequireUppercase = false;
@@ -37,6 +37,7 @@ namespace Blog
             })
                 //.AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<BlogContext>();
+
 
             services.ConfigureApplicationCookie(options =>
             {

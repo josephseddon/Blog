@@ -16,25 +16,69 @@ namespace Blog.Controllers
 {
     public class AuthController : Controller
     {
-        private SignInManager<IdentityUser> _signInManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
 
-        public AuthController(SignInManager<IdentityUser> signInManager)
+        private readonly UserManager<ApplicationUser> _userManager;
+
+        public AuthController(SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager)
         {
             _signInManager = signInManager;
+            _userManager = userManager;
+        }
+
+        [HttpGet]
+        public IActionResult Register()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> RegisterAsync(RegisterViewModel regvm)
+        {
+            if (ModelState.IsValid)
+            {
+
+                var user = new ApplicationUser { UserName = regvm.Email, Email = regvm.Email };
+                var result = await _userManager.CreateAsync(user, regvm.Password);
+
+                if (result.Succeeded)
+                {
+                    await _signInManager.SignInAsync(user, false);
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError("", error.Description);
+                    }
+                }
+            }
+            return View(regvm);
         }
 
         [HttpGet]
         public IActionResult Login()
         {
+            ViewBag.Title = "Login Page";
             return View(new LoginViewModel());
         }
 
         [HttpPost]
         public async Task<IActionResult> Login(LoginViewModel loginvm)
         {
-            var result = await _signInManager.PasswordSignInAsync(loginvm.Username, loginvm.Password, false, false);
+            if (ModelState.IsValid)
+            {
+                var result = await _signInManager.PasswordSignInAsync(loginvm.Username, loginvm.Password, loginvm.RememberMe, false);
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+                ModelState.AddModelError("", "Login details were incorrect. Please try again.");
+                return View(loginvm);
+            }
 
-            return RedirectToAction("Index", "Panel");
+            return View(loginvm);
         }
 
         [HttpGet]

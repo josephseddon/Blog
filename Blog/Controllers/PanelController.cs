@@ -65,7 +65,7 @@ namespace Blog.Controllers
                 Id = postvm.Id,
                 Title = postvm.Title,
                 Body = sanitised,
-                Image = await _fileManager.SaveImage(vm.Image)
+                Image = await _fileManager.SaveImage(postvm.Image)
             };
 
             if (postvm.Image == null)
