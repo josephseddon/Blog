@@ -14,6 +14,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Blog.Data.Repository;
 using Microsoft.AspNetCore.Identity;
 using Blog.Data.FileManager;
+using Blog.Configuration;
 
 namespace Blog
 {
@@ -64,6 +65,12 @@ namespace Blog
             app.UseStaticFiles();
 
             app.UseMvcWithDefaultRoute();
+            var scope = app.ApplicationServices.CreateScope();
+            var roleMgr = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+            var userMgr = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+            new UserRoleSeed(roleMgr).SeedRoles();
+            new UserAccountSeed(userMgr).SeedOwner();
+            new UserAccountSeed(userMgr).SeedMembers();
         }
     }
 }
