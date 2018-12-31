@@ -11,9 +11,9 @@ namespace Blog.Configuration
 {
     public class UserRoleSeed
     {
-        private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly RoleManager<ApplicationRole> _roleManager;
 
-        public UserRoleSeed(RoleManager<IdentityRole> roleManager)
+        public UserRoleSeed(RoleManager<ApplicationRole> roleManager)
         {
             _roleManager = roleManager;
         }
@@ -29,7 +29,7 @@ namespace Blog.Configuration
 
                 if ((_roleManager.FindByNameAsync(roles[i]).Result) == null)
                 {
-                    IdentityResult result = _roleManager.CreateAsync(new IdentityRole { Name = roles[i] }).Result;
+                    IdentityResult result = _roleManager.CreateAsync(new ApplicationRole { Name = roles[i] }).Result;
                 }
             }
 
@@ -40,7 +40,7 @@ namespace Blog.Configuration
 
             if ((await _roleManager.FindByNameAsync("Member")) == null)
             {
-                await _roleManager.CreateAsync(new IdentityRole { Name = "Member" });
+                await _roleManager.CreateAsync(new ApplicationRole { Name = "Member" });
             }
 
         }

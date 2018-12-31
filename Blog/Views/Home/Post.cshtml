@@ -11,3 +11,30 @@
     <img src="@image_path" width="400"/>
 }
 <p>@Model.Body</p>
+
+<div class="commentsection">
+    @{
+        await Html.RenderPartialAsync("_MainComment", new CommentViewModel { PostId = Model.Id, MainCommentID = 0 });
+    }
+
+    @foreach (var c in Model.MainComments)
+    {
+        <p>
+            @c.Message ---- @c.Created
+        </p>
+        <div>
+            <h4> Reponses </h4>
+
+            @foreach (var sc in c.SubComments)
+            {
+                <p>
+                    @sc.Message ---- @sc.Created
+                </p>
+            }
+
+            @{
+                await Html.RenderPartialAsync("_MainComment", new CommentViewModel { PostId = Model.Id, MainCommentID = c.Id });
+            }
+        </div>
+                }
+</div>

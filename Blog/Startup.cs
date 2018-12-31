@@ -29,7 +29,7 @@ namespace Blog
         {
             services.AddMvc();
 
-            services.AddIdentity<ApplicationUser,IdentityRole> (options =>
+            services.AddIdentity<ApplicationUser,ApplicationRole> (options =>
             {
                 options.Password.RequireDigit = false;
                 options.Password.RequireUppercase = false;
@@ -66,7 +66,7 @@ namespace Blog
 
             app.UseMvcWithDefaultRoute();
             var scope = app.ApplicationServices.CreateScope();
-            var roleMgr = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+            var roleMgr = scope.ServiceProvider.GetRequiredService<RoleManager<ApplicationRole>>();
             var userMgr = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
             new UserRoleSeed(roleMgr).SeedRoles();
             new UserAccountSeed(userMgr).SeedOwner();

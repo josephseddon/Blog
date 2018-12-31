@@ -8,6 +8,6 @@ namespace Blog.Models
 {
     public class ApplicationUser : IdentityUser
     {
-
+        public virtual ICollection<IdentityUserRole<string>> Roles { get; } = new List<IdentityUserRole<string>>();
     }
 }
