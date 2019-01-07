@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace Blog.ViewModels
 {
+    //This view model abstracts the view from the comment models for displaying on pages
     public class CommentViewModel
     {
-        [Required]
         public int PostId { get; set; }
-        [Required]
         public int MainCommentID { get; set; }
-        [Required]
+        [Required, MaxLength(240)]
         public string Message { get; set; }
+        public string UserName { get; set; }
     }
 }

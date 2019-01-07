@@ -9,11 +9,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
-
+using Microsoft.AspNetCore.Authorization;
 
 namespace Blog.Controllers
 {
+    [Authorize]
     public class AuthController : Controller
     {
         private readonly SignInManager<ApplicationUser> _signInManager;
@@ -26,13 +26,17 @@ namespace Blog.Controllers
             _userManager = userManager;
         }
 
+
         [HttpGet]
+        [AllowAnonymous]
         public IActionResult Register()
         {
             return View();
         }
 
+        //collect user registration information, verifies and either logs in user or returns the user to the registration screen with an error
         [HttpPost]
+        [AllowAnonymous]
         public async Task<IActionResult> RegisterAsync(RegisterViewModel regvm)
         {
             if (ModelState.IsValid)
@@ -57,14 +61,18 @@ namespace Blog.Controllers
             return View(regvm);
         }
 
+        //returns the user to the Login screen view with a new login viewmodel
         [HttpGet]
+        [AllowAnonymous]
         public IActionResult Login()
         {
             ViewBag.Title = "Login Page";
             return View(new LoginViewModel());
         }
 
+        //recieves login information, validates and either logs user in or returns the usr to the login screen 
         [HttpPost]
+        [AllowAnonymous]
         public async Task<IActionResult> Login(LoginViewModel loginvm)
         {
             if (ModelState.IsValid)
@@ -81,6 +89,7 @@ namespace Blog.Controllers
             return View(loginvm);
         }
 
+        //signs user out and returns the user to the login screen
         [HttpGet]
         public async Task<IActionResult> Logout()
         {

@@ -1,20 +1,32 @@
-﻿(function ($) { 
-    function User() { 
-        var $this = this; 
- 
-        function initilizeModel() { 
-            $("#modal-action-user").on('loaded.bs.modal', function (e) { 
- 
-            }).on('hidden.bs.modal', function (e) { 
-                $(this).removeData('bs.modal'); 
-            }); 
-        } 
-        $this.init = function () { 
-            initilizeModel(); 
-        } 
-    } 
-    $(function () { 
-        var self = new User(); 
-        self.init(); 
-    }) 
-}(jQuery))
+﻿$(function () {
+	var modalContainer = $('.modal-content');
+	$('a[id="createEditUserModal"]').click(function (e) {
+		e.preventDefault();
+		$.get(this.href).done(function (data) {
+			modalContainer.html(data);
+			modalContainer.find('body').modal('show');
+		});
+	});
+});
+
+$(function () {
+	var modalContainer = $('.modal-content');
+	$('a[id="editUserModal"]').click(function (e) {
+		e.preventDefault();
+		$.get(this.href).done(function (data) {
+			modalContainer.html(data);
+			modalContainer.find('body').modal('show');
+		});
+	});
+});
+
+$(function () {
+	var modalContainer = $('.modal-content');
+	$('a[id="deleteUserModal"]').click(function (e) {
+		e.preventDefault();
+		$.get(this.href).done(function (data) {
+			modalContainer.html(data);
+			modalContainer.find('body').modal('show');
+		});
+	});
+});

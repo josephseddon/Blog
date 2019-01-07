@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 
 namespace Blog.ViewModels
 {
+    //This view model abstracts the view from the ApplicationRole model for presenting a list of all ApplicationRoles
     public class ApplicationRoleListViewModel
     {
         public string Id { get; set; }

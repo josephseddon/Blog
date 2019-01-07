@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Blog.Migrations
 {
     [DbContext(typeof(BlogContext))]
-    [Migration("20181229220656_role-Migration")]
-    partial class roleMigration
+    [Migration("20190103024234_postviewcount-Migration")]
+    partial class postviewcountMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -153,6 +153,8 @@ namespace Blog.Migrations
                     b.Property<string>("Image");
 
                     b.Property<string>("Title");
+
+                    b.Property<int>("Views");
 
                     b.HasKey("Id");
 

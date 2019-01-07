@@ -1,0 +1,39 @@
+﻿@model ModifyRolesViewModel
+@using Blog.ViewModels
+
+    <div class="admin-table">
+        <a class="admin-element fun-stuff" asp-controller="UserManagement" asp-action="Index">
+            <div class="admin-element-inner">
+                <div class="title">Users</div>
+                <div class="description">User Management</div>
+            </div>
+        </a>
+        @if (Model.ModifyRoles)
+        {
+            <a class="admin-element fun-stuff" asp-controller="ApplicationRole" asp-action="Index">
+                <div class="admin-element-inner">
+                    <div class="title">Roles</div>
+                    <div class="description">Role Management</div>
+                </div>
+            </a>
+
+            <a class="admin-element fun-stuff" asp-controller="Panel" asp-action="Index">
+                <div class="admin-element-inner">
+                    <div class="title">Posts</div>
+                    <div class="description">Posts Management</div>
+                </div>
+            </a>
+        } else {
+        <style>
+            .admin-table {
+                grid-template-columns: repeat(2, 20 %) !important;
+            }
+        </style>
+        }
+        <a class="admin-element fun-stuff" asp-controller="Analytics" asp-action="Index">
+            <div class="admin-element-inner">
+                <div class="title">Analytics</div>
+                <div class="description">Total Views</br>UserComments</div>
+            </div>
+        </a>
+    </div>

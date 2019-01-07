@@ -1,6 +1,7 @@
 ﻿using Blog.Data;
 using Blog.Models;
 using Blog.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -11,12 +12,14 @@ using System.Threading.Tasks;
 
 namespace Blog.Controllers
 {
+    [Authorize(Policy = "ModifyRoles")]
     public class ApplicationRoleController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<ApplicationRole> _roleManager;
         private readonly BlogContext _db;
 
+        
         public ApplicationRoleController(BlogContext db, UserManager<ApplicationUser> userManager, RoleManager<ApplicationRole> roleManager)
         {
             _roleManager = roleManager;
@@ -24,6 +27,7 @@ namespace Blog.Controllers
             _db = db;
         }
 
+        //returns a userrole, description and the total number of users 
         [HttpGet]
         public IActionResult Index()
         {
@@ -39,6 +43,7 @@ namespace Blog.Controllers
             return View(model);
         }
 
+        //returns modal partial view data view via view model for editting an application role from get request
         [HttpGet]
         public async Task<IActionResult> AddEditApplicationRole(string id)
         {
@@ -55,6 +60,8 @@ namespace Blog.Controllers
             }
             return PartialView("_AddEditApplicationRole", model);
         }
+
+        //updates ApplicationRole data via post request
         [HttpPost]
         public async Task<IActionResult> AddEditApplicationRole(string id, ApplicationRoleViewModel model)
         {
@@ -79,6 +86,7 @@ namespace Blog.Controllers
             return View(model);
         }
 
+        //fetches ApplicationRole data specifically for deletion of one instance
         [HttpGet]
         public async Task<IActionResult> DeleteApplicationRole(string id)
         {
@@ -94,6 +102,7 @@ namespace Blog.Controllers
             return PartialView("_DeleteApplicationRole", name);
         }
 
+        //deletes instance of ApplicationRole
         [HttpPost]
         public async Task<IActionResult> DeleteApplicationRole(string id, IFormCollection form)
         {

@@ -2,6 +2,7 @@
 
 namespace Blog.ViewModels
 {
+    //This view model abstracts the view from the ApplicationRole model for editting roles in the ApplicationRole partial views as well as providing some interface messages
     public class ApplicationRoleViewModel
     {
         public string Id { get; set; }

@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Blog.Migrations
 {
     [DbContext(typeof(BlogContext))]
-    [Migration("20181230062959_modalminorchanges-Migration")]
-    partial class modalminorchangesMigration
+    [Migration("20190104192806_commentuser-Migration")]
+    partial class commentuserMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -114,6 +114,8 @@ namespace Blog.Migrations
 
                     b.Property<int?>("PostId");
 
+                    b.Property<string>("UserName");
+
                     b.HasKey("Id");
 
                     b.HasIndex("PostId");
@@ -132,6 +134,8 @@ namespace Blog.Migrations
                     b.Property<int>("MainCommentId");
 
                     b.Property<string>("Message");
+
+                    b.Property<string>("UserName");
 
                     b.HasKey("Id");
 
@@ -153,6 +157,8 @@ namespace Blog.Migrations
                     b.Property<string>("Image");
 
                     b.Property<string>("Title");
+
+                    b.Property<int>("Views");
 
                     b.HasKey("Id");
 

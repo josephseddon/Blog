@@ -1,0 +1,31 @@
+﻿@model IEnumerable<CommentListViewModel>
+@using Blog.Models
+@using Blog.ViewModels
+@using Blog.Configuration
+
+<partial name="_PageViewCount" />
+
+<div class="top-buffer"></div>
+<div class="panel panel-primary">
+    <div class="panel-heading panel-head">Application Roles</div>
+    <div class="panel-body">
+        <div class="top-buffer"></div>
+        <table class="table table-bordered table-striped table-condensed">
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>Number of Comments</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.UserName</td>
+                        <td>@item.NumberOfComments</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

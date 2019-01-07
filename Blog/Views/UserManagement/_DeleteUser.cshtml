@@ -1,0 +1,17 @@
+﻿@model string
+@using Blog.Models
+
+<form asp-action="DeleteUser" role="form">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">"Delete User"</h4>
+    </div>
+
+    <div class="modal-body form-horizontal">
+        Are you want to delete @Model?
+    </div>
+    <div class="modal-footer">
+        <button data-dismiss="modal" id="btn-cancel" class="btn btn-default" type="button">Cancel</button>
+        <button class="btn btn-success" id="btn-submit" type="submit">Delete User</button>
+    </div>
+</form> 

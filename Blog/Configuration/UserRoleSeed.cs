@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace Blog.Configuration
@@ -13,34 +14,52 @@ namespace Blog.Configuration
     {
         private readonly RoleManager<ApplicationRole> _roleManager;
 
+        //local instance of rolemanager
         public UserRoleSeed(RoleManager<ApplicationRole> roleManager)
         {
             _roleManager = roleManager;
         }
 
+        //Populate applications roles. 
         public void SeedRoles()
         {
+            //array contains admin role names
             string[] roles = new string[] {
                 "Admin",
-                "Member"};
+                "Member",
+                "Blocked"
+            };
 
             for (int i = 0; i < roles.Length; i++)
             {
-
+                //checks to see if the role exists and it doesn't creates it.
                 if ((_roleManager.FindByNameAsync(roles[i]).Result) == null)
                 {
                     IdentityResult result = _roleManager.CreateAsync(new ApplicationRole { Name = roles[i] }).Result;
                 }
             }
 
+            //adds claims to admin role
+            SeedAdminRoleClaim();
+
         }
 
-        public async void SeedMember()
+        public void SeedAdminRoleClaim()
         {
+            string[] claims = new string[] {
+                "ModifyRoles",
+                "AdminInterface",
+                "CanComment",
+                "CanManageUsers",
+                "CanViewAnalytics"
+            };
 
-            if ((await _roleManager.FindByNameAsync("Member")) == null)
+            for (int i = 0; i < claims.Length; i++)
             {
-                await _roleManager.CreateAsync(new ApplicationRole { Name = "Member" });
+
+                var adminRole = _roleManager.FindByNameAsync("Admin").Result;
+
+                IdentityResult result = _roleManager.AddClaimAsync(adminRole, new Claim(claims[i], "")).Result;
             }
 
         }

@@ -28,12 +28,14 @@ namespace Blog.Controllers
             _fileManager = fileManager;
         }
 
+        //returns list of all posts to admin post panel
         public IActionResult Index()
         {
             var posts = _repo.GetAllPosts();
             return View(posts);
         }
 
+        //fetches post data and returns PostView model to the post editting screen
         [HttpGet]
         public IActionResult Edit(int? id)
         {
@@ -54,6 +56,7 @@ namespace Blog.Controllers
             }
         }
 
+        //recieves PostViewModel from post editting screena and updates database entry
         [HttpPost]
         public async Task<IActionResult> Edit(PostViewModel postvm)
         {
@@ -84,6 +87,7 @@ namespace Blog.Controllers
                 return View(post);
         }
 
+        //deletes posts
         [HttpGet]
         public async Task<IActionResult> Remove(int id)
         {
