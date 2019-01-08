@@ -1811,7 +1811,6 @@ pre code {
 
 .form-control {
   display: block;
-  width: 100%;
   height: calc(2.25rem + 2px);
   padding: 0.375rem 0.75rem;
   font-size: 1rem;
@@ -5434,8 +5433,7 @@ button.close {
 }
 
 .modal-header {
-  display: -ms-flexbox;
-  display: flex;
+  display: block;
   -ms-flex-align: start;
   align-items: flex-start;
   -ms-flex-pack: justify;

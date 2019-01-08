@@ -4,6 +4,7 @@ using Blog.Data.Repository;
 using Blog.Models;
 using Blog.Models.Comments;
 using Blog.ViewModels;
+using Ganss.XSS;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -55,6 +56,13 @@ namespace Blog.Controllers
             post.Views++;
             _repo.UpdatePost(post);
             await _repo.SaveChangesAsync();
+            var sanitizer = new HtmlSanitizer();
+            sanitizer.AllowedTags.Remove("form");
+            sanitizer.AllowedTags.Remove("a");
+            sanitizer.AllowedTags.Remove("input");
+            var html = post.Body;
+            var sanitised = sanitizer.Sanitize(html);
+            post.Body = sanitised;
             return View(post);
         }
 

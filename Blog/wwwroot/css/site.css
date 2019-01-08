@@ -107,23 +107,12 @@ a.admin-element {
     cursor: pointer;
 }
 
-.social-media {
-    background: linear-gradient(to bottom right, #fff 0%, #fff 100%);
-}
-
-.social-media .title,
-.social-media .description {
-        background: -webkit-linear-gradient(#f3f9a6, #cbc634);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-    }
-
-.fun-stuff {
+.admin-stuff {
     background: linear-gradient(to bottom right, #36c 0%, #36c 100%);
 }
 
-.fun-stuff .title,
-.fun-stuff .description {
+.admin-stuff .title,
+.admin-stuff .description {
         background: -webkit-linear-gradient(#36c, #36c);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
@@ -235,4 +224,20 @@ h2, .h2 {
     margin: auto;
     text-align: center;
     padding-top: 20px;
+}
+
+.comment-responses {
+    padding-left: 30px;
+}
+
+.commentsection {
+    padding-top: 20px;
+    border-top: 1px solid #333;
+    margin-top: 10px;
+}
+
+#Username,
+#Password{
+    width: 50%;
+    min-width: 250px;
 }

@@ -23,10 +23,12 @@ namespace Blog.ViewModels
         //To ensure cross compatibility with Ocarcle Server varchar max length
         [Required, MaxLength(4000)]
         public string SanitizedBody { get; set; } = null ;
+
         
         //MAX_PATH is 260 characters
         [Required, MaxLength(260)]
         public string CurrentImage { get; set; } = "";
         public IFormFile Image{ get; set; } = null;
+        public int Views { get; set; }
     }
 }

@@ -11,22 +11,23 @@
         var image_path = $"/Image/{Model.Image}";
         <img src="@image_path" width="400" />
     }
-    <p>@Model.Body</p>
+    <p>@Html.Raw(Model.Body)</p>
 
     @if (User.Identity.IsAuthenticated)
     {
-        <div class="commentsection">
+    <div>        
+        <h5> Comments </h5>
             @{
                 await Html.RenderPartialAsync("_MainComment", new CommentViewModel { PostId = Model.Id, MainCommentID = 0 });
             }
-
+        <div class="commentsection">
             @foreach (var c in Model.MainComments)
             {
                 <p>
                     @c.Message ---- @c.Created by @c.UserName
                 </p>
-                <div>
-                    <h4> Reponses </h4>
+                <div class="comment-responses">
+                    <span class="comment-responses-text"> Reponses </span>
 
                     @foreach (var sc in c.SubComments)
                     {
@@ -41,5 +42,6 @@
                 </div>
             }
         </div>
+    </div>
     }
 </div>

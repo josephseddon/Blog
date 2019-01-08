@@ -64,5 +64,21 @@ namespace Blog.Configuration
 
         }
 
+        public void SeedMemberRoleClaim()
+        {
+            string[] claims = new string[] {
+                "CanComment"
+            };
+
+            for (int i = 0; i < claims.Length; i++)
+            {
+
+                var adminRole = _roleManager.FindByNameAsync("Member").Result;
+
+                IdentityResult result = _roleManager.AddClaimAsync(adminRole, new Claim(claims[i], "")).Result;
+            }
+
+        }
+
     }
 }

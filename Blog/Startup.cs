@@ -96,6 +96,7 @@ namespace Blog
             var userMgr = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
             new UserRoleSeed(roleMgr).SeedRoles();
             new UserRoleSeed(roleMgr).SeedAdminRoleClaim();
+            new UserRoleSeed(roleMgr).SeedMemberRoleClaim();
             new UserAccountSeed(userMgr).SeedOwner();
             new UserAccountSeed(userMgr).SeedMembers();
         }

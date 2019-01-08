@@ -46,12 +46,19 @@ namespace Blog.Controllers
             else
             {
                 var post = _repo.GetPost((int)id);
+                var sanitizer = new HtmlSanitizer();
+                sanitizer.AllowedTags.Remove("form");
+                sanitizer.AllowedTags.Remove("a");
+                sanitizer.AllowedTags.Remove("input");
+                var html = post.Body;
+                var sanitised = sanitizer.Sanitize(html);
                 return View(new PostViewModel
                 {
                     Id = post.Id,
                     Title = post.Title,
                     CurrentImage = post.Image,
-                    Body = post.Body
+                    Body = sanitised,
+                    Views = post.Views
                 });
             }
         }
@@ -62,6 +69,9 @@ namespace Blog.Controllers
         public async Task<IActionResult> Edit(PostViewModel postvm)
         {
             var sanitizer = new HtmlSanitizer();
+            sanitizer.AllowedTags.Remove("form");
+            sanitizer.AllowedTags.Remove("a");
+            sanitizer.AllowedTags.Remove("input");
             var html = postvm.Body;
             var sanitised = sanitizer.Sanitize(html);
             var post = new Post
@@ -69,7 +79,8 @@ namespace Blog.Controllers
                 Id = postvm.Id,
                 Title = postvm.Title,
                 Body = sanitised,
-                Image = await _fileManager.SaveImage(postvm.Image)
+                Image = await _fileManager.SaveImage(postvm.Image),
+                Views = postvm.Views
             };
 
             if (postvm.Image == null)

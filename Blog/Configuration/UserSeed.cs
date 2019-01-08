@@ -56,6 +56,7 @@ namespace Blog.Configuration
 
                     //Creates the user with password
                     IdentityResult result = _userManager.CreateAsync(user, "Password123!").Result;
+                    _userManager.AddToRoleAsync(user, "Member").Wait();
                 }
             }
         }
