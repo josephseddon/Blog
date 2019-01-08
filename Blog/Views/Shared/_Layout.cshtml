@@ -11,30 +11,25 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewBag.Title</title>
-    <link href="~/css/site.css" rel="stylesheet" />
     <link href="~/lib/bootstrap/css/bootstrap.css" rel="stylesheet" />
     <link href="~/lib/bootstrap/css/bootstrap-grid.css" rel="stylesheet" />
+    <link href="~/css/site.css" rel="stylesheet" />
 </head>
 <body>
     <div id="site-container">
         <div id='header'>
             <div id='header-nav-container'>
                 <div id='header-nav'>
-                    <a class='header-nav-link header-nav-home' asp-controller="Home" asp-action="Index">Home</a>
+                    <span>|</span><a class='header-nav-link header-nav-home' asp-controller="Home" asp-action="Index">Home</a><span>|</span>
                     @if ((await AuthorizationService.AuthorizeAsync(User, "AdminInterface")).Succeeded)
-                    {
-                        <span>||</span>
-                        <a class='header-nav-link header-nav-create' asp-controller="Panel" asp-action="Edit">Create&nbsp;Post</a>
-                        <span>||</span>
-                        <a class='header-nav-link header-nav-admin' asp-controller="Admin" asp-action="Index">Admin&nbsp;Panel</a>
+                    {<span>|</span><a class='header-nav-link header-nav-create' asp-controller="Panel" asp-action="Edit">Create&nbsp;Post</a><span>|</span>
+                     <span>|</span><a class='header-nav-link header-nav-admin' asp-controller="Admin" asp-action="Index">Admin&nbsp;Panel</a><span>|</span>
                     }
                     @if (User.Identity.IsAuthenticated)
-                    {
-                        <span>||</span> <a class='header-nav-link header-nav-logout' asp-controller="Auth" asp-action="Logout">Logout</a>
+                    {<span>|</span> <a class='header-nav-link header-nav-logout' asp-controller="Auth" asp-action="Logout">Logout</a><span>|</span>
                     }
                     else
-                    {
-                        <span>||</span> <a class='header-nav-link header-nav-login' asp-controller="Auth" asp-action="Login">Sign&nbsp;In</a>
+                    {<span>|</span> <a class='header-nav-link header-nav-login' asp-controller="Auth" asp-action="Login">Sign&nbsp;In</a><span>|</span>
                     }
 
                 </div>

@@ -26,16 +26,19 @@ namespace Blog.Controllers
         {
             var allUserComments = _db.MainComments.ToList();
             var allUserSubComments = _db.SubComments.ToList();
-            List<CommentListViewModel> model = new List<CommentListViewModel>();
+            AnalyticsViewModel model= new AnalyticsViewModel();
 
-            model = _db.MainComments.Select(r => new CommentListViewModel
+            model.CommentList = new List<CommentListViewModel>();
+
+            model.CommentList = _db.MainComments.Select(r => new CommentListViewModel
             {
                 UserName = r.UserName,
                 Id = r.Id,
                 NumberOfComments = allUserComments.Count(ur => ur.Id == r.Id) + allUserSubComments.Count(ur => ur.Id == r.Id)
             }).ToList();
 
-            
+            model.PageViews = _db.Posts.Sum(s => s.Views);
+
             return View(model);
         }
     }

@@ -62,6 +62,7 @@ namespace Blog.Controllers
         }
 
         //updates ApplicationRole data via post request
+        [ValidateAntiForgeryToken]
         [HttpPost]
         public async Task<IActionResult> AddEditApplicationRole(string id, ApplicationRoleViewModel model)
         {
@@ -103,6 +104,7 @@ namespace Blog.Controllers
         }
 
         //deletes instance of ApplicationRole
+        [ValidateAntiForgeryToken]
         [HttpPost]
         public async Task<IActionResult> DeleteApplicationRole(string id, IFormCollection form)
         {

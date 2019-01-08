@@ -138,3 +138,101 @@ a.admin-element {
     grid-column: 1;
     grid-row: 4;
 }
+
+.widthcontrol {
+    width: 660px;
+    margin: auto;
+}
+
+@media screen and (max-width: 640px) {
+    .widthcontrol {
+        width: 100%;
+        padding: 1em;
+    }
+}
+
+.panel-primary {
+    margin-top: 30px
+}
+
+.pageviewscontainer {
+    margin: auto;
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+    margin-top: 20px;
+    border: 1px solid #36c;
+    border-radius: 10px;
+}
+
+.pageviewstext {
+    font-weight: 700;
+}
+
+thead {
+    background: #00AF89;
+    color: white;
+}
+
+h2, .h2 {
+    text-align: center;
+    padding: 20px;
+}
+.mainpage-links a:link {
+    font-size: 30px;
+}
+
+@media screen and (max-width: 640px) {
+    .mainpage-links a:link {
+        font-size: 20px;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .mainpage-links a:link {
+        font-size: 18px;
+    }
+}
+
+
+.mainpage-links a:link,
+.mainpage-links a:visited {
+    color: #333;
+    width: 100%;
+    padding: 14px 25px;
+    text-align: left;
+    text-decoration: none;
+    display: inline-block;
+    font-weight: 400;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.5;
+    letter-spacing: normal;
+    margin-top: 0.4em;
+    margin-bottom: 0.7em;
+    background-image: linear-gradient(to right, #efefef, #fff);
+}
+
+.mainpage-links a:hover,
+.mainpage-links a:active {
+    color: #222;
+    width: 100%;
+    padding: 14px 25px;
+    text-align: left;
+    text-decoration: none;
+    display: inline-block;
+    font-weight: 400;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.5;
+    letter-spacing: normal;
+    margin-top: 0.4em;
+    margin-bottom: 0.7em;
+    background-image: linear-gradient(to right, #eee, #efefef);
+}
+
+#body-title > h2 {
+    margin: auto;
+    text-align: center;
+    padding-top: 20px;
+}

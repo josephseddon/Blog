@@ -37,6 +37,7 @@ namespace Blog.Controllers
         //collect user registration information, verifies and either logs in user or returns the user to the registration screen with an error
         [HttpPost]
         [AllowAnonymous]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> RegisterAsync(RegisterViewModel regvm)
         {
             if (ModelState.IsValid)
@@ -73,6 +74,7 @@ namespace Blog.Controllers
         //recieves login information, validates and either logs user in or returns the usr to the login screen 
         [HttpPost]
         [AllowAnonymous]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginViewModel loginvm)
         {
             if (ModelState.IsValid)
@@ -97,6 +99,12 @@ namespace Blog.Controllers
 
             return RedirectToAction("Index", "Home");
          }
-   }
+
+        [HttpGet]
+        public IActionResult AccessDenied()
+        {
+            return View();
+        }
+    }
 
 }

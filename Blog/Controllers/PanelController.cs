@@ -58,6 +58,7 @@ namespace Blog.Controllers
 
         //recieves PostViewModel from post editting screena and updates database entry
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(PostViewModel postvm)
         {
             var sanitizer = new HtmlSanitizer();

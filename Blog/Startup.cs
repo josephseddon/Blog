@@ -47,6 +47,8 @@ namespace Blog
             services.ConfigureApplicationCookie(options =>
             {
                 options.LoginPath = "/Auth/Login";
+                options.Cookie.HttpOnly = true;
+                options.AccessDeniedPath = "/Auth/AccessDenied";
             });
 
 
@@ -75,7 +77,7 @@ namespace Blog
         {
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
+                app.UseExceptionHandler("/Home/Error");
             }
             else
             {

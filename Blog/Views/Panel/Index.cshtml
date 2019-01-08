@@ -3,38 +3,40 @@
 @{ 
 
 }
-<h2>Admin Page!</h2>
+<div class="widthcontrol">
+    <h2>Post Management</h2>
 
-<table class="table table-bordered table-striped table-condensed">
-    <thead>
-        <tr>
-            <th>Post Title</th>
-            <th>Post Views</th>
-            <th>Action</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var post in Model)
-        {
+    <table class="table table-bordered table-striped table-condensed">
+        <thead>
             <tr>
-                <td>@post.Title</td>
-                <td>@post.Views</td>
-                <td>
-                    <a asp-controller="Panel"
-                       asp-action="Edit"
-                       asp-route-id="@post.Id"
-                       class="btn btn-info">
-                        Edit
-                    </a>
-
-                    <a asp-controller="Panel"
-                       asp-action="Remove"
-                       asp-route-id="@post.Id"
-                       class="btn btn-danger">
-                        Delete
-                    </a>
-                </td>
+                <th>Post Title</th>
+                <th>Post Views</th>
+                <th>Action</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var post in Model)
+            {
+                <tr>
+                    <td>@post.Title</td>
+                    <td>@post.Views</td>
+                    <td>
+                        <a asp-controller="Panel"
+                           asp-action="Edit"
+                           asp-route-id="@post.Id"
+                           class="btn btn-info">
+                            Edit
+                        </a>
+
+                        <a asp-controller="Panel"
+                           asp-action="Remove"
+                           asp-route-id="@post.Id"
+                           class="btn btn-danger">
+                            Delete
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

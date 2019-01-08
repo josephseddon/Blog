@@ -1,6 +1,8 @@
 ﻿@model EditUserViewModel
 @using Blog.ViewModels
 
+@Html.AntiForgeryToken()
+
 <form asp-action="EditUser" role="form">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>

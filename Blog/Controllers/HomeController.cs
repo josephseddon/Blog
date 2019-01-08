@@ -69,6 +69,7 @@ namespace Blog.Controllers
 
 
         //create comment and subcomment
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Comment(CommentViewModel commentvm)
         {
             if (!ModelState.IsValid)

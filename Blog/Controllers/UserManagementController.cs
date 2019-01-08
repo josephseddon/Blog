@@ -65,6 +65,7 @@ namespace Blog.Controllers
 
         //recieves post information from new user form and creates user.
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddUser(UserViewModel model)
         {
             if (ModelState.IsValid)
@@ -118,6 +119,7 @@ namespace Blog.Controllers
 
         //recieves post request data relating to changes to a user, updates that information.
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> EditUser(string id, EditUserViewModel model)
         {
             if (ModelState.IsValid)
@@ -172,6 +174,7 @@ namespace Blog.Controllers
 
         //recieves request from delete partial view and deletes user
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteUser(string id, IFormCollection form)
         {
             if (!String.IsNullOrEmpty(id))
